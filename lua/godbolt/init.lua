@@ -31,10 +31,11 @@ local function godbolt(begin, _end, reuse_3f, compiler)
   local execute = (require("godbolt.execute")).execute
   local fuzzy = (require("godbolt.fuzzy")).fuzzy
   local ft = vim.bo.filetype
-  local compiler0 = (compiler or config.languages[ft].compiler)
+  local languages = (require("godbolt")).config.languages
+  local compiler0 = (compiler or languages[ft].compiler)
   local options
-  if config.languages[ft] then
-    options = vim.deepcopy(config.languages[ft].options)
+  if languages[ft] then
+    options = vim.deepcopy(languages[ft].options)
   else
     options = {}
   end

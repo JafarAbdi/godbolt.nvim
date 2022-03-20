@@ -53,9 +53,10 @@
         execute (. (require :godbolt.execute) :execute)
         fuzzy (. (require :godbolt.fuzzy) :fuzzy)
         ft vim.bo.filetype
-        compiler (or compiler (. config.languages ft :compiler))]
-    (var options (if (. config.languages ft)
-                     (vim.deepcopy (. config.languages ft :options))
+        languages (. (require :godbolt) :config :languages)
+        compiler (or compiler (. languages ft :compiler))]
+    (var options (if (. languages ft)
+                     (vim.deepcopy (. languages ft :options))
                      {}))
     (let [flags (vim.fn.input
                   {:prompt "Flags: "
